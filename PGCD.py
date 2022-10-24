@@ -1,0 +1,1 @@
+# trouver le plus grand diviseur commun et le plus petit multiple commun
