@@ -1,5 +1,6 @@
 from tkinter import *
 import sqlite3
+from tkinter import ttk
 from turtle import width
 
 def validate():
@@ -11,7 +12,7 @@ def validate():
     conn = sqlite3.connect("mydatabase.db")
     cur = conn.cursor()
 
-    req  = "CREATE TABLE IF NOT EXISTS students ( id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, email TEXT NOT NULL, age INTEGER NOT NULL"
+    req  = "CREATE TABLE IF NOT EXISTS students ( id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, email TEXT NOT NULL, age INTEGER NOT NULL)"
     cur.execute(req)
     
     rqt = "INSERT INTO students (name, email, age) VALUES (?, ?, ?)"
@@ -50,4 +51,32 @@ entryAge.place(x=100, y = 40, width=100)
 # validate button
 btnValide = Button(root, text="valider", command = validate)
 btnValide.place(x =350, y = 40, width=200, height=25)
+
+#==============================
+# display data
+#==============================
+
+tree = ttk.Treeview(root, columns =(1,2,3,4), height =5, show="headings")
+tree.place(x= 25, y = 170, width=550, height=175)
+
+tree.heading(1 , text = "ID")
+tree.heading(2 , text = "Name")
+tree.heading(3 , text = "Email")
+tree.heading(4 , text = "Age")
+
+tree.column(1, width =50)
+tree.column(2 ,width =100)
+tree.column(3 ,width =100)
+tree.column(3 ,width =50)
+
+
+conn = sqlite3.connect("mydatabase.db")
+cur = conn.cursor()
+req  = "CREATE TABLE IF NOT EXISTS students ( id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, email TEXT NOT NULL, age INTEGER NOT NULL)"
+cur.execute(req)
+select  = cur.execute("SELECT * FROM students")
+for row in select:
+    tree.insert('', END, values = row)
+# cur.execute(select)
+
 root.mainloop()
