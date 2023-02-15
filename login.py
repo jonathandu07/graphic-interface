@@ -7,7 +7,10 @@ def register():
     if str(nom) + ".txt" in File_register_name:
         print ("Erreur le nom d'utilistateur existe déjà" + str(nom))
     else :
-        Filee = open(nom, "w")
+        File = open(str(nom)+".txt", "w")
+        File.whrite(str(nom)+":"+str(password))
+        File.close()
+        print ("Compte créé avec succès")
     
 def Login_Window_open():
     Login_Window = Tk()
@@ -99,7 +102,7 @@ def Register_Window_open():
 
     # Bouton Register
     Register_button = Button(Register_frame, text="Register", font=(
-        "Arial", 20), bg="#091226", fg="#f7f7ff", width=8, height=1,)
+        "Arial", 20), bg="#091226", fg="#f7f7ff", width=8, height=1, command=register())
     Register_button.grid(row=6, column=0,)
 
     Register_frame.pack(expand=YES)
