@@ -1,6 +1,14 @@
 from tkinter import *
-
-
+import os
+def register():
+    nom = NomRegister_entry.get()
+    password = passwordRegister_entry.get()
+    File_register_name = os.listdir()
+    if str(nom) + ".txt" in File_register_name:
+        print ("Erreur le nom d'utilistateur existe déjà" + str(nom))
+    else :
+        Filee = open(nom, "w")
+    
 def Login_Window_open():
     Login_Window = Tk()
     Login_Window.title("Login")
@@ -64,13 +72,13 @@ def Register_Window_open():
     Space.grid(row=1, column=0)
 
     # mot de passe
-    password = Label(Register_frame, text="Mot de passe...", font=(
+    passwordRegister = Label(Register_frame, text="Mot de passe...", font=(
         "Arial", 20), bg="#f7f7ff", fg="#181818", width=15, height=1)
-    password.grid(row=2, column=0)
-    global password_entry
-    password_entry = Entry(Register_frame, font=(
+    passwordRegister.grid(row=2, column=0)
+    global passwordRegister_entry
+    passwordRegister_entry = Entry(Register_frame, font=(
         "Arial", 18), bg="#707070", fg="#181818", width=25)
-    password_entry.grid(row=2, column=1)
+    passwordRegister_entry.grid(row=2, column=1)
 
     # space
     Space = Label(Register_frame, text="", bg="#707070", height=1)
