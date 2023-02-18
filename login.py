@@ -8,9 +8,25 @@ def register():
         print ("Erreur le nom d'utilistateur existe déjà" + str(nom))
     else :
         File = open(str(nom)+".txt", "w")
-        File.whrite(str(nom)+":"+str(password))
+        File.write(str(nom)+":"+str(password))
         File.close()
         print ("Compte créé avec succès")
+    
+def login():
+    nomLogin = NomLogin_entry.get()
+    passwordLogin = NomLogin_entry.get()
+    File_login_name = os.listdir()
+    if str(nomLogin) + ".txt" in FileLogin_name:
+        fichier = open(str(nomLogin)+".txt", "r")
+        liste_info_login = fichier.read().split(":")
+        fichier.close()
+        if passwordLogin == liste_info_login[1]:
+            print ("Vous êtes connecté")
+            
+        else:
+            print ("mot de passe incorrect")
+    else:
+        print ("Compte inexistant")
     
 def Login_Window_open():
     Login_Window = Tk()
@@ -47,7 +63,7 @@ def Login_Window_open():
 
     # Bouton Login
     Login_button = Button(Login_frame, text="Login", font=(
-        "Arial", 20), bg="#091226", fg="#f7f7ff", width=8, height=1,)
+        "Arial", 20), bg="#091226", fg="#f7f7ff", width=8, height=1, command=login)
     Login_button.grid(row=5, column=0,)
 
     Login_frame.pack(expand=YES)
@@ -102,7 +118,7 @@ def Register_Window_open():
 
     # Bouton Register
     Register_button = Button(Register_frame, text="Register", font=(
-        "Arial", 20), bg="#091226", fg="#f7f7ff", width=8, height=1, command=register())
+        "Arial", 20), bg="#091226", fg="#f7f7ff", width=8, height=1, command=register)
     Register_button.grid(row=6, column=0,)
 
     Register_frame.pack(expand=YES)
